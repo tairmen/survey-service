@@ -26,7 +26,7 @@ docker run -d --name survey-service \
 touch .env
 ```
 
-Example:
+Example of env file:
 
 ```bash
 DB_HOST=<your_db_host>
