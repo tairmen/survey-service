@@ -1,0 +1,302 @@
+{
+	"info": {
+		"_postman_id": "2d4b4a9a-d91a-4cf8-ab17-950034e695fe",
+		"name": "Surveys",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17033701"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"user\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/auth/login",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Surveys",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/survey",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"survey"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Survey",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Test yourself\",\r\n    \"questions\": [\r\n        {\r\n            \"text\": \"What is weather today?\"\r\n        },\r\n        {\r\n            \"text\": \"Are you like your life?\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/survey",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"survey"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Survey",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/survey/35",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"survey",
+						"35"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Survey By ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/survey/2",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"survey",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Survey",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Check you\",\r\n    \"questions\": [\r\n        {\r\n            \"text\": \"Who are you?\"\r\n        },\r\n        {\r\n            \"text\": \"Are you stupid?\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/survey/2",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"survey",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Answers To Survey",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"answers\": [\r\n        {\r\n            \"questionId\": 3,\r\n            \"text\": \"Fuck\"\r\n        },\r\n        {\r\n            \"questionId\": 4,\r\n            \"text\": \"Fuck\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{API_URL}}/survey/37/answers",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"survey",
+						"37",
+						"answers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Conflicts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/conflicts?survey_id=37",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"conflicts"
+					],
+					"query": [
+						{
+							"key": "passing_id",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "survey_id",
+							"value": "37"
+						},
+						{
+							"key": "user_id",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Conflict By ID",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{API_URL}}/conflicts/2",
+					"host": [
+						"{{API_URL}}"
+					],
+					"path": [
+						"conflicts",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
