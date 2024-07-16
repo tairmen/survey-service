@@ -12,7 +12,7 @@ import { AuthController } from './auth.controller';
     PassportModule,
     JwtModule.register({
       secret: 'secretKey', // замените на свой секретный ключ
-      signOptions: { expiresIn: '60m' },
+      signOptions: { expiresIn: '24h' },
     }),
   ],
   controllers: [AuthController],

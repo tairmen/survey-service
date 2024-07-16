@@ -7,10 +7,11 @@ import { Question } from '../entities/question.entity';
 import { Answer } from '../entities/answer.entity';
 import { SurveyPassing } from '../entities/survey-passing.entity';
 import { Conflict } from '../entities/conflict.entity';
+import { User } from '../entities/user.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Survey, Question, Answer, SurveyPassing, Conflict]),
+    TypeOrmModule.forFeature([Survey, Question, Answer, SurveyPassing, Conflict, User]),
   ],
   providers: [SurveyService],
   controllers: [SurveyController],

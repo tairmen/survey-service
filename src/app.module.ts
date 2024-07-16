@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SurveyModule } from './survey/survey.module';
+import { ConflictModule } from './conflicts/conflicts.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
@@ -21,6 +22,7 @@ import { ConfigModule } from '@nestjs/config';
       synchronize: true
     }),
     SurveyModule,
+    ConflictModule,
     AuthModule,
     UsersModule,
   ],

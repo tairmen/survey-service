@@ -9,6 +9,6 @@ export class Question {
   @Column()
   text: string;
 
-  @ManyToOne(() => Survey, survey => survey.questions)
+  @ManyToOne(() => Survey, survey => survey.questions, { onDelete: 'CASCADE' })
   survey: Survey;
 }

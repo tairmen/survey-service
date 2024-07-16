@@ -10,7 +10,7 @@ export class Survey {
   @Column()
   title: string;
 
-  @OneToMany(() => Question, question => question.survey)
+  @OneToMany(() => Question, question => question.survey, { cascade: true, eager: true })
   questions: Question[];
 
   @OneToMany(() => SurveyPassing, passing => passing.survey)

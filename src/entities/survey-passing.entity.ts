@@ -1,4 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToMany, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { Survey } from './survey.entity';
 import { Answer } from './answer.entity';
 import { Conflict } from './conflict.entity';
@@ -14,6 +14,9 @@ export class SurveyPassing {
 
   @ManyToOne(() => User)
   user: User;
+
+  @CreateDateColumn()
+  createdAt: Date;
 
   @OneToMany(() => Answer, answer => answer.passing)
   answers: Answer[];

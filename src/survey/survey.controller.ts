@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Put, Param, Delete, UseGuards, Request } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete, UseGuards, Request, Req } from '@nestjs/common';
 import { SurveyService } from './survey.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CreateSurveyDto, UpdateSurveyDto, CreateAnswerDto } from './dto';
@@ -34,7 +34,7 @@ export class SurveyController {
   }
 
   @Post(':id/answers')
-  createAnswers(@Param('id') id: string, @Body() createAnswerDto: CreateAnswerDto) {
-    return this.surveyService.createAnswers(+id, createAnswerDto);
+  createAnswers(@Req() req: any, @Param('id') id: string, @Body() createAnswerDto: CreateAnswerDto) {
+    return this.surveyService.createAnswers(+id, createAnswerDto, req.user.sub);
   }
 }

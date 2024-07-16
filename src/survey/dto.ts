@@ -11,3 +11,7 @@ export class UpdateSurveyDto {
 export class CreateAnswerDto {
     readonly answers: { questionId: number; text: string }[];
 }
+
+export class ConflictDto {
+    readonly description: string;
+}
