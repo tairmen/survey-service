@@ -93,6 +93,15 @@ export class SurveyService {
 
     const conflicts: ConflictDto[] = await this.calculateConflicts(externalServiceReqData);
 
+    const conflictEntities = conflicts.map(el => {
+      let conflictEntity = new Conflict()
+      conflictEntity.description = el.description
+      conflictEntity.passing = savedSurveyPassing
+      return conflictEntity
+    })
+
+    await this.conflictRepository.save(conflictEntities);
+
     return {
       surveyPassing,
       conflicts,

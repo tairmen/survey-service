@@ -12,7 +12,7 @@ export class ConflictService {
 
     async getConflicts(passingId?: number, surveyId?: number, userId?: number) {
         const queryBuilder = this.conflictRepository.createQueryBuilder('conflict')
-            .innerJoinAndSelect('conflict.surveyPassing', 'surveyPassing')
+            .innerJoinAndSelect('conflict.passing', 'surveyPassing')
             .innerJoinAndSelect('surveyPassing.survey', 'survey')
             .innerJoinAndSelect('surveyPassing.user', 'user');
 

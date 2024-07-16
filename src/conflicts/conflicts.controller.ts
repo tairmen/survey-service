@@ -2,12 +2,12 @@ import { Controller, Get, Post, Body, Put, Param, Delete, Query, UseGuards, Req 
 import { ConflictService } from './conflicts.service';
 import { AuthGuard } from '@nestjs/passport';
 
-@Controller('survey')
+@Controller('conflicts')
 @UseGuards(AuthGuard('jwt'))
 export class ConflictController {
   constructor(private readonly conflictService: ConflictService) {}
 
-  @Get('conflicts')
+  @Get('')
   getConflicts(@Query('passing_id') passingId: string, @Query('survey_id') surveyId: string, @Query('user_id') userId: string) {
     return this.conflictService.getConflicts(
       passingId ? +passingId : undefined,
@@ -16,7 +16,7 @@ export class ConflictController {
     );
   }
 
-  @Get('conflicts/:id')
+  @Get('/:id')
   getConflict(@Param('id') id: string) {
     return this.conflictService.findConflictById(+id);
   }
