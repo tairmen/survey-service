@@ -15,3 +15,20 @@ export class CreateAnswerDto {
 export class ConflictDto {
     readonly description: string;
 }
+
+export class AnswersDto {
+    readonly answer: string;
+    readonly question: string;
+}
+
+export class SurveyPassingDto {
+    readonly answers: AnswersDto[];
+    id?: string;
+}
+
+export class ConflictServiceResponseDto {
+    readonly reason: string;
+    readonly info?: string;
+    readonly id?: number;
+    readonly createdAt?: Date;
+}

@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { CreateSurveyDto, UpdateSurveyDto, CreateAnswerDto, ConflictDto } from './dto';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+import { CreateSurveyDto, UpdateSurveyDto, CreateAnswerDto, ConflictDto, SurveyPassingDto, ConflictServiceResponseDto } from './dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Survey } from '../entities/survey.entity';
@@ -69,16 +69,29 @@ export class SurveyService {
     delete surveyPassing.survey.questions;
     surveyPassing.user = await this.userRepository.findOne({ where: { id: userId }, select: ["id", "username"] })
 
+    const externalServiceReqData: SurveyPassingDto = {
+      answers: []
+    }
+
     for (const answerDto of createAnswerDto.answers) {
       const answer = new Answer();
       answer.text = answerDto.text;
       answer.question = questions.find(question => question.id == answerDto.questionId);
+      if (!answer.question) {
+        throw new HttpException(`Question with ID ${answerDto.questionId} not found in this survey`, HttpStatus.BAD_REQUEST);
+      }
       surveyPassing.answers.push(answer);
+      externalServiceReqData.answers.push({
+        answer: answer.text,
+        question: answer.question.text
+      })
     }
 
-    await this.surveyPassingRepository.save(surveyPassing);
+    const savedSurveyPassing = await this.surveyPassingRepository.save(surveyPassing);
 
-    const conflicts: ConflictDto[] = await this.calculateConflicts(surveyPassing);
+    externalServiceReqData.id = savedSurveyPassing.id.toString()
+
+    const conflicts: ConflictDto[] = await this.calculateConflicts(externalServiceReqData);
 
     return {
       surveyPassing,
@@ -86,14 +99,21 @@ export class SurveyService {
     };
   }
 
-  private async calculateConflicts(surveyPassing: SurveyPassing): Promise<ConflictDto[]> {
-    // const response = await axios.post('http://localhost:3001/calculate', surveyPassing);
-    // return response.data;
+  private async calculateConflicts(surveyPassing: SurveyPassingDto): Promise<ConflictDto[]> {
 
-    return [
-      {
-        description: 'Conflict: Answer to question 2 is "no"',
+    const response = await axios.post(process.env.CONFLICT_SERVICE_URL, surveyPassing);
+
+    const conflicts = response.data.map((el: ConflictServiceResponseDto) => {
+      return {
+        description: el.reason
       }
-    ]
+    })
+    return conflicts;
+
+    // return [
+    //   {
+    //     description: 'Conflict: Answer to question 2 is "no"',
+    //   }
+    // ]
   }
 }
