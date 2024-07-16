@@ -4,7 +4,7 @@ import * as request from 'supertest';
 import { ConflictModule } from './conflicts.module';
 import { ConflictService } from './conflicts.service';
 
-describe('SurveyController', () => {
+describe('ConflictController', () => {
   let app: INestApplication;
   let conflictService = {
     getConflicts: () => ([]),
