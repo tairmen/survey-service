@@ -21,19 +21,26 @@ docker run -d --name survey-service \
 
 # Run the Docker container with db
 
+```bash
 touch .env
+```
 
 Example:
+
+```bash
   DB_HOST=<your_db_host> \
   DB_PORT=<your_db_port> \
   DB_USERNAME=<your_db_user> \
   DB_PASSWORD=<your_db_password> \
   DB_DATABASE=<your_db_name> \
   CONFLICT_SERVICE_URL=<your_conflict_service_url> \
+```
 
+```bash
 docker-compose build
 
 docker-compose up
+```
 
 ## Installation
 
